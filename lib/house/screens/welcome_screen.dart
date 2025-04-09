@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vision_ex_digital_practical/account/screens/create_account.dart';
+import 'package:vision_ex_digital_practical/account/screens/create_account_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -58,7 +58,7 @@ class WelcomeScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const CreateAccountPage(),
+                        builder: (_) => const CreateAccountScreen(),
                       ),
                     );
                   },

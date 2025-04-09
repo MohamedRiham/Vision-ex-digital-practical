@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vision_ex_digital_practical/account/bloc/account_bloc.dart';
+import 'package:vision_ex_digital_practical/account/screens/profile_screen.dart';
 
 class SideDrawer extends StatefulWidget {
   const SideDrawer({super.key});
@@ -50,7 +51,14 @@ class _SideDrawerState extends State<SideDrawer> {
                         'My Profile',
                         style: TextStyle(color: Colors.black),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const ProfileScreen(),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

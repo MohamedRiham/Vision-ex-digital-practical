@@ -3,16 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vision_ex_digital_practical/account/bloc/account_bloc.dart';
 import 'package:vision_ex_digital_practical/account/models/account.dart';
 import 'package:vision_ex_digital_practical/house/bloc/house_bloc.dart';
-import 'package:vision_ex_digital_practical/house/screens/home_screen.dart';
+import 'package:vision_ex_digital_practical/house/screens/general_house_details_screen.dart';
 
-class CreateAccountPage extends StatefulWidget {
-  const CreateAccountPage({super.key});
+class CreateAccountScreen extends StatefulWidget {
+  const CreateAccountScreen({super.key});
 
   @override
-  State<CreateAccountPage> createState() => _CreateAccountPageState();
+  State<CreateAccountScreen> createState() => _CreateAccountScreenState();
 }
 
-class _CreateAccountPageState extends State<CreateAccountPage> {
+class _CreateAccountScreenState extends State<CreateAccountScreen> {
   final _formKey = GlobalKey<FormState>();
   String username = '';
   String email = '';
@@ -53,7 +53,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     if (context.mounted) {
                       Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                        MaterialPageRoute(builder: (context) => GeneralHouseDetailsScreen()),
                         (Route<dynamic> route) => false,
                       );
                     }

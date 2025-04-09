@@ -4,13 +4,13 @@ class SearchBox extends StatelessWidget {
   final double height;
   final String hiddenText;
   final Function(String) search;
-  final Function(String)? onChange;
+  final Function(String) onChange;
   const SearchBox({
     super.key,
     required this.height,
     required this.hiddenText,
     required this.search,
-    this.onChange,
+    required this.onChange,
   });
 
   @override
