@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vision_ex_digital_practical/common_widgets/search_bar.dart';
 import 'package:vision_ex_digital_practical/common_widgets/side_draw.dart';
+import 'package:vision_ex_digital_practical/house/screens/view_all_houses_screen.dart';
+import 'package:vision_ex_digital_practical/house/screens/view_all_offers_screen.dart';
 
 class GeneralHouseDetailsScreen extends StatelessWidget {
   const GeneralHouseDetailsScreen({super.key});
@@ -48,7 +50,11 @@ class GeneralHouseDetailsScreen extends StatelessWidget {
                       },
                     ),
 
-                    _buildTitle('Featured'),
+                    _buildTitle('Featured', () {
+                      Navigator.of(
+                        context,
+                      ).push(_createRoute(ViewAllHousesScreen()));
+                    }),
 
                     SizedBox(
                       height: 200,
@@ -72,7 +78,11 @@ class GeneralHouseDetailsScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 16),
 
-                    _buildTitle('New offers'),
+                    _buildTitle('New offers', () {
+                      Navigator.of(
+                        context,
+                      ).push(_createRoute(ViewAllOffersScreen()));
+                    }),
                     SizedBox(
                       height: 200,
                       child: ListView.builder(
@@ -94,7 +104,7 @@ class GeneralHouseDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTitle(String titleText) {
+  Widget _buildTitle(String titleText, VoidCallback navigate) {
     return Padding(
       padding: EdgeInsets.all(12.0),
 
@@ -102,9 +112,25 @@ class GeneralHouseDetailsScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(titleText, style: TextStyle(fontSize: 18, color: Colors.black)),
-          InkWell(onTap: () {}, child: Text('View all')),
+          InkWell(onTap: navigate, child: Text('View all')),
         ],
       ),
+    );
+  }
+
+  Route _createRoute(Widget page) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+        var tween = Tween(
+          begin: begin,
+          end: end,
+        ).chain(CurveTween(curve: curve));
+        return SlideTransition(position: animation.drive(tween), child: child);
+      },
     );
   }
 }

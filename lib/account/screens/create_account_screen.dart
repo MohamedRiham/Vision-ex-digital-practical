@@ -16,7 +16,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   final _formKey = GlobalKey<FormState>();
   String username = '';
   String email = '';
-
+  bool _isSuccess = false;
   @override
   Widget build(BuildContext context) {
     final accountCubit = BlocProvider.of<AccountCubit>(context);
@@ -43,23 +43,49 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    await accountCubit.saveAccount(
-                      Account(username: username, email: email),
-                    );
-                    if (context.mounted) {
-                      context.read<HouseCubit>().getHouseData();
-                    }
-                    if (context.mounted) {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => GeneralHouseDetailsScreen()),
-                        (Route<dynamic> route) => false,
+                    try {
+                      _formKey.currentState!.save();
+                      await accountCubit.saveAccount(
+                        Account(username: username, email: email),
+                      );
+                      if (context.mounted) {
+                        context.read<HouseCubit>().getHouseData();
+                      }
+                      if (context.mounted) {
+                        setState(() {
+                          _isSuccess = true;
+                        });
+                        Future.delayed(const Duration(seconds: 2), () {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => GeneralHouseDetailsScreen(),
+                            ),
+                            (Route<dynamic> route) => false,
+                          );
+                        });
+                      }
+                    } catch (_) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('An error occurred, please try again'),
+                          backgroundColor: Colors.red,
+                        ),
                       );
                     }
                   }
                 },
                 child: const Text('Save Account'),
+              ),
+              const SizedBox(height: 20),
+              AnimatedOpacity(
+                opacity: _isSuccess ? 1.0 : 0.0,
+                duration: const Duration(seconds: 1),
+                child: const Icon(
+                  Icons.check_circle,
+                  color: Colors.green,
+                  size: 100,
+                ),
               ),
             ],
           ),
