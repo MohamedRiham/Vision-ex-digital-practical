@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "627367692181",
+    "project_id": "vision-ex-digital-practical",
+    "storage_bucket": "vision-ex-digital-practical.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627367692181:android:9acd6a6454e02ce0a6189c",
+        "android_client_info": {
+          "package_name": "com.visionexdigital.vision_ex_digital_practical"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-PyLC6aHQTIExkqz8yf3uOIP_4QgEBoE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
